@@ -84,6 +84,8 @@ body {
 .game {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  /* This will align the top of game-board and game-info */
 }
 
 .game-info {
@@ -93,4 +95,69 @@ body {
 /* to highlight winning squares: */
 .square.highlight {
   background-color: #ffff99;
+}
+
+.title {
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  /* Just an example, you can use any rounded font of your choice */
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 0 px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  /* take up the full viewport height */
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  /* This ensures the board rows stack vertically */
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  padding-top: 0;
+
+  /* adjust the size of the board below */
+  width: 270px;
+  height: auto;
+  line-height: 30px;
+
+  /* resize: both;
+  overflow: auto; */
+}
+
+.square {
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  font-weight: bold;
+  width: 60px;
+  height: 60px;
+  line-height: 30px;
+}
+
+.square.X {
+  color: red;
+}
+
+.square.O {
+  color: blue;
+}
+
+.game-info {
+  margin-left: 50px;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+.how-to-play {
+  font-size: 1.2em;
+  margin-top: 0;
+  padding: 0;
+  max-width: 200px;
+  word-wrap: break-word;
 }

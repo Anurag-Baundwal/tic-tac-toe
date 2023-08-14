@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './styles.css'
+// import { Howl } from 'howler'; // for sound effects
 
 function Square({ value, onSquareClick, highlight }) {
   return (
-    <button className={`square ${highlight ? 'highlight' : ''}`} onClick={onSquareClick}>
+    <button className={`square ${value} ${highlight ? 'highlight' : ''}`} onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -20,17 +21,16 @@ function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares, i);
   }
 
-
-
   const winnerData = calculateWinner(squares);
   let winningLine = winnerData ? winnerData.line : [];
   let status;
   if (winnerData) {
     status = 'Winner: ' + winnerData.winner;
+  } else if (squares.every(square => square)) {
+    status = "It's a draw!";
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Side to play: ' + (xIsNext ? 'X' : 'O');
   }
-
   return (
     <>
       <div className="status">{status}</div>
@@ -94,15 +94,23 @@ export default function Game() {
   const sortedMoves = isAscending ? moves : moves.slice().reverse();
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <button onClick={() => setIsAscending(!isAscending)}>
-          {isAscending ? 'Sort Descending' : 'Sort Ascending'}
-        </button>
-        <ol>{sortedMoves}</ol>
+    <div className="game-container">
+      <h1 className="title">X Tic-Tac-Toe O</h1>
+      <div className="game">
+        <div className="how-to-play">
+          <h2>How to Play</h2>
+          <p>Click on any square to place your mark.</p>
+        </div>
+        <div className="game-board">
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        </div>
+        <div className="game-info">
+          <h2>Moves</h2>
+          <button onClick={() => setIsAscending(!isAscending)}>
+            {isAscending ? 'Sort: Descending' : 'Sort: Ascending'}
+          </button>
+          <ol>{sortedMoves}</ol>
+        </div>
       </div>
     </div>
   );
